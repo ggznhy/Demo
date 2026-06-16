@@ -1,0 +1,16 @@
+services:
+  classify:
+    build: .
+    image: pytorch-cv-demo:latest
+    command: ["sh", "-c", "python src/download_sample.py && python src/classify.py --image data/sample.jpg"]
+    volumes:
+      # Mount local images without rebuilding
+      - ./data:/app/data
+
+  train:
+    build: .
+    image: pytorch-cv-demo:latest
+    command: ["python", "src/train_mnist.py", "--epochs", "3"]
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
