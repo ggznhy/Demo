@@ -1,0 +1,9 @@
+services:
+  cesium-resume:
+    build:
+      context: .
+      args:
+        VITE_CESIUM_ION_TOKEN: ${VITE_CESIUM_ION_TOKEN:-}
+    ports:
+      - "8080:80"
+    restart: unless-stopped
